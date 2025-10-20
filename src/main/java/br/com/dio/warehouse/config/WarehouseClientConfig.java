@@ -7,10 +7,8 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 public class WarehouseClientConfig {
-
     @Bean
     RestClient storefrontClient(@Value("${warehouse.base-path}") final String basePath){
         return RestClient.create(basePath);
     }
-
 }

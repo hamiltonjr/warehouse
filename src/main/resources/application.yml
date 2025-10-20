@@ -2,10 +2,10 @@
 server:
   servlet:
     context-path: /warehouse
+
 spring:
   application:
     name: warehouse
-
   datasource:
     url: jdbc:h2:mem:warehouse
     driverClassName: org.h2.Driver
@@ -23,7 +23,7 @@ spring:
         trace: false
         web-allow-others: true
   rabbitmq:
-    host: rabbitmq
+    host: localhost
     port: 5672
     username: admin
     password: admin

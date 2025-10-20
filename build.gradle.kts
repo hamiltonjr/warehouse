@@ -50,6 +50,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+// devtools task
 tasks.named("build") {
     doLast{
         val trigger = file("src/main/resources/trigger.txt")
@@ -60,6 +61,7 @@ tasks.named("build") {
     }
 }
 
+// boot run task
 tasks.named<JavaExec>("bootRun"){
     jvmArgs = listOf("-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005")
 }
