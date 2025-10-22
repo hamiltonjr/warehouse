@@ -7,9 +7,8 @@ import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import java.math.BigDecimal;
 import java.util.*;
-
 import static br.com.dio.warehouse.entity.StockStatus.AVAILABLE;
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -38,13 +37,25 @@ public class ProductEntity {
         return Objects.hash(id, name);
     }
 
-    public StockEntity decStock() {
-        var stock = this.stocks.stream()
+    private StockEntity getStockWithMinSoldPrice() {
+        return this.stocks.stream()
                 .filter(s -> s.getStatus().equals(AVAILABLE))
                 .min(Comparator.comparing(StockEntity::getSoldPrice))
                 .orElseThrow();
+    }
+
+    public StockEntity decStock() {
+        var stock = getStockWithMinSoldPrice();
         stock.decAmount();
         return stock;
+    }
+
+    public BigDecimal getPrice() {
+        return getStockWithMinSoldPrice().getSoldPrice();
+    }
+
+    public boolean isUnavailable() {
+        return false;
     }
 
     @PrePersist

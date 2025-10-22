@@ -32,6 +32,10 @@ public class StockEntity {
     @JoinColumn(name = "product_id", nullable = false)
     private ProductEntity product;
 
+    public boolean isUnavailable() {
+        return status == UNAVAILABLE;
+    }
+
     public void decAmount() {
         this.amount--;
         if (this.amount == 0) {
