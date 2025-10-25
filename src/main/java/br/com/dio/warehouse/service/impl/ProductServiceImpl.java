@@ -43,7 +43,7 @@ public class ProductServiceImpl implements IProductService {
         var stock = entity.decStock();                // Decrementa estoque
         repository.save(entity);                      // Salva atualização
         if (stock.isUnavailable()) {                  // Se acabar estoque, notifica
-            stockService.changeStatus(entity.getId(), stock.getStatus());
+            stockService.changeStatus(stock.getId(), stock.getStatus());
         }
     }
 
